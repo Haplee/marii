@@ -78,38 +78,21 @@ export default function BackgroundMusic() {
 
     if (PLAYLIST.length === 0) return null;
 
+
+
     return (
-        <div style={{
-            position: 'fixed',
-            bottom: '20px',
-            right: '20px',
-            zIndex: 9999,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-end',
-            gap: '8px'
-        }}>
+        <div className="music-player-container">
             {/* Indicador de canción */}
-            <div style={{
-                background: 'rgba(0,0,0,0.6)',
-                backdropFilter: 'blur(8px)',
-                padding: '12px 18px',
-                borderRadius: '16px',
-                color: 'white',
-                fontSize: '1rem',
-                border: '1px solid rgba(255,255,255,0.1)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '12px',
-                opacity: isPlaying ? 1 : 0.7,
-                transition: 'all 0.3s ease',
-                maxWidth: '300px',
-                cursor: 'pointer' // Permitir click para siguiente canción
-            }} onClick={handleNextTrack} title="Click para siguiente canción">
-                <span style={{ fontSize: '2rem', animation: isPlaying ? 'spin 3s linear infinite' : 'none' }}>💿</span>
+            <div
+                className="music-player-info"
+                onClick={handleNextTrack}
+                title="Click para siguiente canción"
+                style={{ opacity: isPlaying ? 1 : 0.7 }}
+            >
+                <span className="music-player-disc" style={{ animation: isPlaying ? 'spin 3s linear infinite' : 'none' }}>💿</span>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <span style={{ fontSize: '1.35rem', opacity: 0.9, textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>Está sonando</span>
-                    <span style={{ fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '140px' }}>
+                    <span className="music-player-label">Está sonando</span>
+                    <span className="music-player-track">
                         {currentTrack.title}
                     </span>
                 </div>
@@ -119,22 +102,7 @@ export default function BackgroundMusic() {
             <div style={{ display: 'flex', gap: '8px' }}>
                 <button
                     onClick={togglePlay}
-                    style={{
-                        background: 'rgba(255,255,255,0.1)',
-                        backdropFilter: 'blur(5px)',
-                        border: '1px solid rgba(255,255,255,0.2)',
-                        borderRadius: '50%',
-                        width: '70px',
-                        height: '70px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                        color: 'white',
-                        fontSize: '2.7rem',
-                        transition: 'all 0.3s ease',
-                        boxShadow: '0 6px 16px rgba(0,0,0,0.4)'
-                    }}
+                    className="music-control-button"
                     aria-label={isPlaying ? "Pausar música" : "Reproducir música"}
                 >
                     {isPlaying ? '⏸️' : '▶️'}

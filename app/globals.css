@@ -173,4 +173,93 @@ body {
   to {
     transform: rotate(360deg);
   }
-}/* Music Player Styles */
+}
+
+/* Music Player Styles */
+.music-player-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.music-player-info {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 12px 18px;
+  border-radius: 16px;
+  color: white;
+  font-size: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.3s ease;
+  max-width: 300px;
+  cursor: pointer;
+}
+
+.music-player-disc {
+  font-size: 2rem;
+  /* El spin se maneja inline o con clase condicional */
+}
+
+.music-player-label {
+  font-size: 1.35rem;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.music-player-track {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  font-size: 1rem;
+}
+
+.music-control-button {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  font-size: 2.7rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Ajustes específicos para móvil si fuera necesario, 
+   pero estas medidas ya son grandes */
+@media (max-width: 480px) {
+  .music-player-container {
+    bottom: 30px;
+    right: 16px;
+  }
+
+  /* Forzamos que sea grande también en móvil */
+  .music-control-button {
+    width: 65px;
+    height: 65px;
+    font-size: 2.5rem;
+  }
+
+  .music-player-info {
+    max-width: 85vw;
+  }
+}
+
+/* Music Player Styles */
