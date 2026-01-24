@@ -34,7 +34,7 @@ export default function Home() {
     }
 
     return (
-        <main style={{ width: '100%', height: '100%' }}>
+        <main style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
             <PolaroidGallery mariiImages={mariiImages} babyImages={babyImages} />
         </main>
     );

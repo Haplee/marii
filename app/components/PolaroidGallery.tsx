@@ -53,7 +53,7 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
     }, []);
 
     const hasPhotos = currentImages && currentImages.length > 0;
-    const DURATION = 4.5;
+    const DURATION = 8;
 
     // Autoplay
     useEffect(() => {
