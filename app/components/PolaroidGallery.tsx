@@ -3,15 +3,15 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const MESSAGES = [
-    "Eres mucho más fuerte de lo que crees",
-    "Un examen no define tu talento",
-    "Tu vocación brilla mucho más",
-    "Respira hondo... todo saldrá bien",
-    "Estoy muy orgulloso de ti",
-    "Esto es solo un pequeño bache",
-    "Tienes un corazón de oro",
-    "Sigue adelante, lo haces genial",
-    "Te quiero ver sonreír"
+    "Vales muchísimo",
+    "Orgullo Infinito",
+    "La nota no te define",
+    "Vocación Pura",
+    "Eres Increíble",
+    "Todo saldrá bien",
+    "No te rindas nunca",
+    "Brillas con luz propia",
+    "Estamos contigo"
 ];
 
 export default function PolaroidGallery({ images }: { images: string[] }) {
@@ -42,8 +42,8 @@ export default function PolaroidGallery({ images }: { images: string[] }) {
         <>
             {/* Cabecera Tipo Playlist/Reproduciendo */}
             <div className="title-container">
-                <p className="subtitle">REPRODUCIENDO PARA MARIA</p>
-                <p className="main-title">Ánimos & Recuerdos</p>
+                <p className="subtitle">REPRODUCIENDO PARA</p>
+                <p className="main-title">Marii the Nursee</p>
             </div>
 
             <div className="gallery-wrapper">
@@ -83,7 +83,7 @@ export default function PolaroidGallery({ images }: { images: string[] }) {
                                     transition={{ duration: 0.4 }}
                                 >
                                     <h2 className="track-title">{MESSAGES[currentIndex % MESSAGES.length]}</h2>
-                                    <p className="track-artist">Para Maria enfermera</p>
+                                    <p className="track-artist">Marii the Nursee</p>
                                 </motion.div>
                             </AnimatePresence>
 

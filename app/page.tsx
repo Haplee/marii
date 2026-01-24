@@ -21,11 +21,6 @@ export default function Home() {
 
     return (
         <main style={{ width: '100%', height: '100%' }}>
-            <div className="title-container">
-                <h1 className="main-title">Maria</h1>
-                <p className="subtitle">Pequeños instantes de calma</p>
-            </div>
-
             <PolaroidGallery images={images} />
         </main>
     );
