@@ -98,7 +98,7 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
                             transition: 'all 0.3s ease'
                         }}
                     >
-                        Marii 💖
+                        Marii ❤️
                     </button>
                     <button
                         onClick={() => handleModeChange('baby')}
