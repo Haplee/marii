@@ -5,7 +5,7 @@ import ReactPlayer from 'react-player/youtube';
 
 export default function BackgroundMusic() {
     const [isPlaying, setIsPlaying] = useState(false);
-    const [isMuted, setIsMuted] = useState(false);
+    const [isMuted, setIsMuted] = useState(false); // Start unmuted (user might need to interact)
 
     useEffect(() => {
         setIsPlaying(true);
