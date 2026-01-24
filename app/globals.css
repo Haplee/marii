@@ -62,7 +62,6 @@ body {
   flex: 1;
   width: 100%;
   max-width: 480px;
-  /* Ancho máximo mayor */
   margin: 0 auto;
 
   display: flex;
@@ -70,21 +69,23 @@ body {
   justify-content: center;
   align-items: center;
   padding: 24px;
-
-  /* Reducir padding horizontal en móviles para que la foto sea más grande */
-  @media (max-width: 450px) {
-    padding: 16px;
-    padding-bottom: 8rem;
-  }
+  /* Espacio inferior para evitar solapamiento con controles */
+  padding-bottom: 8rem;
 }
 
 /* Contenedor de la "Carátula" */
 .album-art-container {
   width: 100%;
+  /* En móvil, optimizar para ocupar buen ancho sin tocar bordes */
+  width: 88vw;
+  max-width: 360px;
+  /* Estándar Pixel/iPhone */
   aspect-ratio: 1/1;
   background-color: var(--spotify-dark-gray);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  /* Sombra elevada */
   border-radius: 12px;
+  /* Radio estándar App */
   overflow: hidden;
   position: relative;
 
@@ -92,7 +93,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .album-art-img {
@@ -104,18 +105,23 @@ body {
 /* Info del track */
 .track-info {
   width: 100%;
+  /* Alinear al ancho de la carátula */
+  width: 88vw;
+  max-width: 360px;
+
   display: flex;
   flex-direction: column;
   gap: 6px;
   margin-bottom: 1.5rem;
-  /* Alineación visual */
-  padding-left: 4px;
+  padding-left: 0;
+  /* Alinear limpio a la izquierda */
+  text-align: left;
 }
 
 .track-title {
-  font-size: 1.8rem;
-  /* Mucho más grande */
-  font-weight: 800;
+  font-size: 1.7rem;
+  /* Tamaño Título Nativo (ej. YouTube Music Now Playing) */
+  font-weight: 700;
   color: var(--spotify-white);
   line-height: 1.2;
   white-space: nowrap;
@@ -126,19 +132,21 @@ body {
 
 .track-artist {
   font-size: 1.1rem;
+  /* Subtítulo legible */
   color: var(--spotify-light-gray);
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  font-weight: 400;
+  letter-spacing: 0.01em;
 }
 
 /* Barra de progreso */
 .progress-container {
   width: 100%;
   height: 4px;
-  background-color: rgba(255, 255, 255, 0.2);
+  /* Barra fina elegante */
+  background-color: rgba(255, 255, 255, 0.15);
   border-radius: 4px;
   overflow: hidden;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 .progress-bar {
