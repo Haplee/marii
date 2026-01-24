@@ -30,18 +30,19 @@ body {
   flex-direction: column;
 }
 
-/* Cabecera: Ocupa espacio natural arriba, sin posición absoluta */
+/* Cabecera: Ocupa espacio natural arriba */
 .title-container {
   width: 100%;
   text-align: center;
   padding-top: 2rem;
+  /* Más espacio arriba */
   padding-bottom: 1rem;
   flex-shrink: 0;
-  /* No se encoge */
 }
 
 .subtitle {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
+  /* Un poco más grande */
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
@@ -50,42 +51,46 @@ body {
 }
 
 .main-title {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
+  /* Un poco más grande */
   font-weight: 700;
   color: var(--spotify-white);
 }
 
-/* Wrapper principal: Ocupa el resto del espacio y centra el contenido */
+/* Wrapper principal */
 .gallery-wrapper {
   flex: 1;
-  /* Ocupa todo el espacio restante verticalmente */
   width: 100%;
-  max-width: 450px;
-  /* Un poco más ancho para tablets */
+  max-width: 100%;
+  /* Permitir ancho completo en móvil */
   margin: 0 auto;
-  /* Centrado horizontal del bloque */
 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* Centrado vertical del contenido dentro del bloque */
+  /* Centrar verticalmente */
   align-items: center;
-  padding: 24px;
-  padding-bottom: 4rem;
-  /* Un poco de aire abajo */
+  padding: 20px;
+  /* Padding estándar */
+  padding-bottom: 8rem;
+  /* Espacio extra para que no choque con controles/bordes */
 }
 
 /* Contenedor de la "Carátula" */
 .album-art-container {
   width: 100%;
+  max-width: 380px;
+  /* Limite máximo para que no sea gigante en tablets */
   aspect-ratio: 1/1;
   background-color: var(--spotify-dark-gray);
-  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  /* Sombra suave */
   border-radius: 12px;
   overflow: hidden;
   position: relative;
-  margin-bottom: 2.5rem;
-  /* Más separación con el texto */
+
+  /* Márgenes dinámicos */
+  margin-bottom: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,18 +106,19 @@ body {
 /* Info del track */
 .track-info {
   width: 100%;
+  max-width: 380px;
+  /* Alineado con la carátula */
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   margin-bottom: 1rem;
-  padding-left: 4px;
-  /* Ligera alineación visual izquierda */
-  padding-right: 4px;
 }
 
 .track-title {
-  font-size: 1.6rem;
-  font-weight: 700;
+  font-size: 1.8rem;
+  /* Título más grande y legible */
+  font-weight: 800;
+  /* Más peso */
   color: var(--spotify-white);
   line-height: 1.2;
   white-space: nowrap;
@@ -121,7 +127,8 @@ body {
 }
 
 .track-artist {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  /* Artista más grande */
   color: var(--spotify-light-gray);
   opacity: 0.9;
 }
@@ -132,9 +139,8 @@ body {
   height: 4px;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 4px;
-  /* Más redondeado */
   overflow: hidden;
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 .progress-bar {
@@ -142,4 +148,23 @@ body {
   background-color: var(--spotify-white);
   border-radius: 4px;
   width: 0%;
+}
+
+/* Ajustes específicos para pantallas pequeñas */
+@media (max-width: 380px) {
+  .title-container {
+    padding-top: 1.5rem;
+  }
+
+  .track-title {
+    font-size: 1.5rem;
+  }
+
+  .track-artist {
+    font-size: 1rem;
+  }
+
+  .gallery-wrapper {
+    padding-bottom: 6rem;
+  }
 }

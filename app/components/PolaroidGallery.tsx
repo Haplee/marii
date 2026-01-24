@@ -69,6 +69,7 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
     return (
         <>
             <div className="title-container">
+                <img src="/logo.png" alt="Marii Logo" style={{ height: '40px', marginBottom: '10px', display: 'block', marginInline: 'auto' }} />
                 <p className="subtitle">REPRODUCIENDO PARA</p>
                 <p className="main-title">Marii the Nursee</p>
             </div>
