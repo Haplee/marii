@@ -1,0 +1,179 @@
+:root {
+  --bg-color: #F9F9F7;
+  --text-main: #2D2D2D;
+  --text-scnd: #6D6D6D;
+  --accent: #E0DCD3;
+  --white: #FFFFFF;
+  --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.08);
+  --shadow-hover: 0 20px 60px -15px rgba(0,0,0,0.15);
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tipografía */
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+}
+
+.title-container {
+  position: absolute;
+  top: 40px;
+  text-align: center;
+  z-index: 10;
+  width: 100%;
+  padding: 0 20px;
+  opacity: 0;
+  animation: fadeInDown 1.2s ease-out forwards;
+}
+
+.main-title {
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  color: var(--text-scnd);
+  font-weight: 400;
+}
+
+/* Contenedor de Polaroids */
+.gallery-container {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+
+.polaroid {
+  position: absolute;
+  background: var(--white);
+  padding: 12px 12px 50px 12px;
+  box-shadow: var(--shadow-soft);
+  border-radius: 4px; /* Borde muy sutil estilo papel */
+  width: 280px;
+  max-width: 85vw;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  cursor: pointer;
+  transform-origin: center;
+  backface-visibility: hidden;
+}
+
+.polaroid-img-container {
+  width: 100%;
+  aspect-ratio: 4/5; /* Formato retrato suave */
+  background-color: #f0f0f0;
+  overflow: hidden;
+  position: relative;
+}
+
+.polaroid-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.polaroid-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Caveat', cursive; /* Fuente manuscrita */
+  color: var(--text-scnd);
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+/* Estados e Interacción */
+.polaroid.active {
+  transform: translate(0, 0) rotate(0deg) scale(1.1) !important;
+  z-index: 50;
+  box-shadow: var(--shadow-hover);
+}
+
+.polaroid.hidden-stack {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Animaciones */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+
+.floating {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Mensaje de ánimo (Footer) */
+.message-box {
+  position: absolute;
+  bottom: 40px;
+  text-align: center;
+  padding: 0 20px;
+  max-width: 400px;
+  z-index: 20;
+}
+
+.message-text {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--text-main);
+  font-style: italic;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.message-text.visible {
+  opacity: 1;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .gallery-container {
+    height: 55vh;
+  }
+  .polaroid {
+    width: 260px;
+  }
+}
