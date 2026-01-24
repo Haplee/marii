@@ -87,13 +87,13 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
                     <button
                         onClick={() => handleModeChange('marii')}
                         style={{
-                            padding: '8px 20px',
+                            padding: '10px 24px',
                             borderRadius: '24px',
                             border: 'none',
                             background: mode === 'marii' ? '#ffffff' : 'transparent',
                             color: mode === 'marii' ? '#000000' : '#ffffff',
-                            fontWeight: 600,
-                            fontSize: '0.9rem',
+                            fontWeight: 700,
+                            fontSize: '1.1rem',
                             cursor: 'pointer',
                             transition: 'all 0.3s ease'
                         }}
@@ -103,13 +103,13 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
                     <button
                         onClick={() => handleModeChange('baby')}
                         style={{
-                            padding: '8px 20px',
+                            padding: '10px 24px',
                             borderRadius: '24px',
                             border: 'none',
                             background: mode === 'baby' ? '#ffffff' : 'transparent',
                             color: mode === 'baby' ? '#000000' : '#ffffff',
-                            fontWeight: 600,
-                            fontSize: '0.9rem',
+                            fontWeight: 700,
+                            fontSize: '1.1rem',
                             cursor: 'pointer',
                             transition: 'all 0.3s ease'
                         }}

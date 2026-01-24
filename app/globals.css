@@ -41,18 +41,18 @@ body {
 }
 
 .subtitle {
-  font-size: 0.8rem;
-  /* Un poco más grande */
+  font-size: 1.1rem;
+  /* Aumentado considerablemente */
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 6px;
-  font-weight: 500;
+  margin-bottom: 8px;
+  font-weight: 600;
 }
 
 .main-title {
-  font-size: 1.1rem;
-  /* Un poco más grande */
+  font-size: 1.8rem;
+  /* Aumentado considerablemente */
   font-weight: 700;
   color: var(--spotify-white);
 }
@@ -116,13 +116,14 @@ body {
 
 .track-title {
   /* Tamaño dinámico agresivo */
-  font-size: 9vw !important;
+  font-size: 8vw !important;
+  /* Ligeramente reducido para mejor ajuste */
   font-weight: 800;
   color: var(--spotify-white);
   line-height: 1.1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  /* Permitir multilínea */
+  white-space: normal;
+  overflow: visible;
   margin-bottom: 4px;
 }
 

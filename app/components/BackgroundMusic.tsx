@@ -108,7 +108,7 @@ export default function BackgroundMusic() {
             }} onClick={handleNextTrack} title="Click para siguiente canción">
                 <span style={{ fontSize: '1rem', animation: isPlaying ? 'spin 3s linear infinite' : 'none' }}>💿</span>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <span style={{ fontSize: '0.7rem', opacity: 0.7, textTransform: 'uppercase', letterSpacing: '1px' }}>Está sonando</span>
+                    <span style={{ fontSize: '0.9rem', opacity: 0.9, textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>Está sonando</span>
                     <span style={{ fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '140px' }}>
                         {currentTrack.title}
                     </span>
@@ -131,7 +131,7 @@ export default function BackgroundMusic() {
                         justifyContent: 'center',
                         cursor: 'pointer',
                         color: 'white',
-                        fontSize: '1.2rem',
+                        fontSize: '1.8rem',
                         transition: 'all 0.3s ease',
                         boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
                     }}
