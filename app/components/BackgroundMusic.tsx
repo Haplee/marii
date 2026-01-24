@@ -93,22 +93,22 @@ export default function BackgroundMusic() {
             <div style={{
                 background: 'rgba(0,0,0,0.6)',
                 backdropFilter: 'blur(8px)',
-                padding: '8px 12px',
-                borderRadius: '12px',
+                padding: '12px 18px',
+                borderRadius: '16px',
                 color: 'white',
-                fontSize: '0.85rem',
+                fontSize: '1rem',
                 border: '1px solid rgba(255,255,255,0.1)',
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
+                gap: '12px',
                 opacity: isPlaying ? 1 : 0.7,
                 transition: 'all 0.3s ease',
-                maxWidth: '200px',
+                maxWidth: '300px',
                 cursor: 'pointer' // Permitir click para siguiente canción
             }} onClick={handleNextTrack} title="Click para siguiente canción">
-                <span style={{ fontSize: '1rem', animation: isPlaying ? 'spin 3s linear infinite' : 'none' }}>💿</span>
+                <span style={{ fontSize: '2rem', animation: isPlaying ? 'spin 3s linear infinite' : 'none' }}>💿</span>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <span style={{ fontSize: '0.9rem', opacity: 0.9, textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>Está sonando</span>
+                    <span style={{ fontSize: '1.35rem', opacity: 0.9, textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 'bold' }}>Está sonando</span>
                     <span style={{ fontWeight: 600, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '140px' }}>
                         {currentTrack.title}
                     </span>
@@ -124,16 +124,16 @@ export default function BackgroundMusic() {
                         backdropFilter: 'blur(5px)',
                         border: '1px solid rgba(255,255,255,0.2)',
                         borderRadius: '50%',
-                        width: '45px',
-                        height: '45px',
+                        width: '70px',
+                        height: '70px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         cursor: 'pointer',
                         color: 'white',
-                        fontSize: '1.8rem',
+                        fontSize: '2.7rem',
                         transition: 'all 0.3s ease',
-                        boxShadow: '0 4px 12px rgba(0,0,0,0.3)'
+                        boxShadow: '0 6px 16px rgba(0,0,0,0.4)'
                     }}
                     aria-label={isPlaying ? "Pausar música" : "Reproducir música"}
                 >
