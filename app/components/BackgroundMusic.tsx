@@ -23,9 +23,7 @@ export default function BackgroundMusic() {
                 width="1px"
                 height="1px"
                 config={{
-                    youtube: {
-                        playerVars: { showinfo: 0, controls: 0 }
-                    }
+                    playerVars: { showinfo: 0, controls: 0 }
                 }}
                 onError={(e) => console.log("Music player error", e)}
             />
