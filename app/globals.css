@@ -4,8 +4,7 @@
   --spotify-light-gray: #b3b3b3;
   --spotify-white: #ffffff;
   --spotify-blue: #1e3a8a;
-  /* Azul profundo */
-  --spotify-blue-gradient: linear-gradient(180deg, #1e40af 0%, #121212 100%);
+  --spotify-blue-gradient: linear-gradient(180deg, #1e3a8a 0%, #000000 85%);
 }
 
 * {
@@ -17,134 +16,130 @@
 
 body {
   background: var(--spotify-black);
-  background: var(--spotify-blue-gradient);
+  background-image: var(--spotify-blue-gradient);
+  background-attachment: fixed;
   color: var(--spotify-white);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* Layout Flex Vertical completo para centrado real */
   height: 100vh;
   height: 100dvh;
   width: 100vw;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  /* Centrado vertical absoluto */
-  align-items: center;
-  /* Centrado horizontal absoluto */
 }
 
-/* Título superior discreto (como el nombre de playlist o "Reproduciendo") */
+/* Cabecera: Ocupa espacio natural arriba, sin posición absoluta */
 .title-container {
-  position: absolute;
-  top: 6vh;
   width: 100%;
   text-align: center;
-  z-index: 10;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+  flex-shrink: 0;
+  /* No se encoge */
 }
 
 .subtitle {
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--spotify-light-gray);
-  margin-bottom: 4px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 6px;
+  font-weight: 500;
 }
 
 .main-title {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--spotify-white);
 }
 
-/* Wrapper principal centrado */
+/* Wrapper principal: Ocupa el resto del espacio y centra el contenido */
 .gallery-wrapper {
+  flex: 1;
+  /* Ocupa todo el espacio restante verticalmente */
   width: 100%;
-  max-width: 400px;
-  /* Ancho típico de móvil */
-  height: 100%;
+  max-width: 450px;
+  /* Un poco más ancho para tablets */
+  margin: 0 auto;
+  /* Centrado horizontal del bloque */
+
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* Centrado vertical del contenido dentro del bloque */
   align-items: center;
   padding: 24px;
+  padding-bottom: 4rem;
+  /* Un poco de aire abajo */
 }
 
-/* Contenedor de la "Carátula" (Foto) */
+/* Contenedor de la "Carátula" */
 .album-art-container {
   width: 100%;
   aspect-ratio: 1/1;
-  /* Cuadrado o 4:5 estilo Spotify */
-  max-height: 400px;
   background-color: var(--spotify-dark-gray);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
-  /* Sombra difusa estilo Spotify */
-  border-radius: 8px;
-  /* Borde sutil */
+  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.6);
+  border-radius: 12px;
   overflow: hidden;
-  /* Para recortar la imagen */
   position: relative;
-  margin-bottom: 2rem;
-  /* Espacio para los textos de abajo */
+  margin-bottom: 2.5rem;
+  /* Más separación con el texto */
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .album-art-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
 }
 
-/* Área de "Canción" (Mensaje) y controles */
+/* Info del track */
 .track-info {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-bottom: 1.5rem;
+  gap: 6px;
+  margin-bottom: 1rem;
+  padding-left: 4px;
+  /* Ligera alineación visual izquierda */
+  padding-right: 4px;
 }
 
 .track-title {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 700;
   color: var(--spotify-white);
   line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .track-artist {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: var(--spotify-light-gray);
+  opacity: 0.9;
 }
 
 /* Barra de progreso */
 .progress-container {
   width: 100%;
   height: 4px;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  /* Más redondeado */
   overflow: hidden;
-  margin-top: 8px;
+  margin-top: 12px;
 }
 
 .progress-bar {
   height: 100%;
   background-color: var(--spotify-white);
-  border-radius: 2px;
+  border-radius: 4px;
   width: 0%;
-}
-
-/* Animación de carga */
-@keyframes pulse {
-  0% {
-    opacity: 0.6;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0.6;
-  }
 }
