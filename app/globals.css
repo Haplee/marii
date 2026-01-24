@@ -68,26 +68,23 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 16px;
   /* Espacio inferior para evitar solapamiento con controles */
   padding-bottom: 8rem;
 
   @media (max-width: 450px) {
     padding: 10px;
-    /* Padding mínimo para maximizar */
     padding-bottom: 7rem;
   }
 }
 
 /* Contenedor de la "Carátula" */
 .album-art-container {
-  width: 100%;
-  /* ENORME en móvil */
-  width: 95vw;
-  max-width: 400px;
+  width: 95vw !important;
+  max-width: 420px !important;
   aspect-ratio: 1/1;
   background-color: var(--spotify-dark-gray);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 50px rgba(0, 0, 0, 0.6);
   border-radius: 12px;
   overflow: hidden;
   position: relative;
@@ -96,7 +93,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .album-art-img {
@@ -107,11 +104,8 @@ body {
 
 /* Info del track */
 .track-info {
-  width: 100%;
-  /* Alinear al ancho de la carátula */
-  width: 95vw;
-  max-width: 400px;
-
+  width: 95vw !important;
+  max-width: 420px !important;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -121,8 +115,8 @@ body {
 }
 
 .track-title {
-  font-size: 2.2rem;
-  /* Muy Grande */
+  /* Tamaño dinámico agresivo */
+  font-size: 9vw !important;
   font-weight: 800;
   color: var(--spotify-white);
   line-height: 1.1;
@@ -132,12 +126,24 @@ body {
   margin-bottom: 4px;
 }
 
+/* Media query para no pasarse en tablets/desktop */
+@media (min-width: 500px) {
+  .track-title {
+    font-size: 3rem !important;
+  }
+}
+
 .track-artist {
-  font-size: 1.3rem;
-  /* Muy Grande y legible */
+  font-size: 5vw !important;
   color: var(--spotify-light-gray);
   font-weight: 500;
   letter-spacing: 0.01em;
+}
+
+@media (min-width: 500px) {
+  .track-artist {
+    font-size: 1.5rem !important;
+  }
 }
 
 /* Barra de progreso */
@@ -155,27 +161,6 @@ body {
   background-color: var(--spotify-white);
   border-radius: 4px;
   width: 0%;
-}
-
-/* Ajustes finales para asegurar tamaño gigante en todos los móviles */
-.track-title {
-  font-size: 2.8rem;
-  /* GIGANTE */
-  font-weight: 800;
-  color: var(--spotify-white);
-  line-height: 1.1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-bottom: 4px;
-}
-
-.track-artist {
-  font-size: 1.5rem;
-  /* Muy legible */
-  color: var(--spotify-light-gray);
-  font-weight: 500;
-  letter-spacing: 0.01em;
 }
 
 /* Animación para el disco de música */
