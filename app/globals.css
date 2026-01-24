@@ -157,23 +157,25 @@ body {
   width: 0%;
 }
 
-/* Ajustes específicos para pantallas pequeñas */
-@media (max-width: 380px) {
-  .title-container {
-    padding-top: 1.5rem;
-  }
+/* Ajustes finales para asegurar tamaño gigante en todos los móviles */
+.track-title {
+  font-size: 2.8rem;
+  /* GIGANTE */
+  font-weight: 800;
+  color: var(--spotify-white);
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
 
-  .track-title {
-    font-size: 1.5rem;
-  }
-
-  .track-artist {
-    font-size: 1rem;
-  }
-
-  .gallery-wrapper {
-    padding-bottom: 6rem;
-  }
+.track-artist {
+  font-size: 1.5rem;
+  /* Muy legible */
+  color: var(--spotify-light-gray);
+  font-weight: 500;
+  letter-spacing: 0.01em;
 }
 
 /* Animación para el disco de música */
