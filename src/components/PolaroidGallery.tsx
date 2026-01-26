@@ -76,9 +76,10 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
             <div className="gallery-wrapper">
 
                 {/* Botones de Navegación Estilo Tabs/Píldoras */}
+                {/* Botones de Navegación Estilo Tabs/Píldoras */}
                 <div style={{
                     display: 'flex',
-                    gap: '12px',
+                    gap: '8px',
                     marginBottom: '20px',
                     background: 'rgba(255,255,255,0.1)',
                     padding: '4px',
@@ -87,13 +88,13 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
                     <button
                         onClick={() => handleModeChange('marii')}
                         style={{
-                            padding: '10px 24px',
+                            padding: '8px 20px',
                             borderRadius: '24px',
                             border: 'none',
                             background: mode === 'marii' ? '#ffffff' : 'transparent',
                             color: mode === 'marii' ? '#000000' : '#ffffff',
                             fontWeight: 700,
-                            fontSize: '1.1rem',
+                            fontSize: '1rem',
                             cursor: 'pointer',
                             transition: 'all 0.3s ease'
                         }}
@@ -103,13 +104,13 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
                     <button
                         onClick={() => handleModeChange('baby')}
                         style={{
-                            padding: '10px 24px',
+                            padding: '8px 20px',
                             borderRadius: '24px',
                             border: 'none',
                             background: mode === 'baby' ? '#ffffff' : 'transparent',
                             color: mode === 'baby' ? '#000000' : '#ffffff',
                             fontWeight: 700,
-                            fontSize: '1.1rem',
+                            fontSize: '1rem',
                             cursor: 'pointer',
                             transition: 'all 0.3s ease'
                         }}

@@ -9,6 +9,9 @@ export default defineConfig({
         VitePWA({
             registerType: 'autoUpdate',
             includeAssets: ['logo.png', 'icon.png', 'music/*.mp3', 'images/*.jpg', 'bebes/*.jpg'],
+            devOptions: {
+                enabled: true
+            },
             manifest: {
                 name: 'Marii Gallery',
                 short_name: 'Marii',
