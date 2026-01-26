@@ -7,21 +7,40 @@ export default function BackgroundMusic() {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
     const [hasInteracted, setHasInteracted] = useState(false);
+    const [playlist, setPlaylist] = useState<{ title: string; file: string }[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
 
-    // LISTA DE CANCIONES
-    const PLAYLIST = [
-        { title: "Mi Varadero", file: "Salistre - Mi Varadero.mp3" },
-        { title: "Todos los días son lunes", file: "Salistre - TODOS LOS DÍAS SON LUNES.mp3" },
-        { title: "Tararea", file: "Salistre - Tararea.mp3" }
-    ];
+    // Cargar lista de canciones dinámicamente
+    useEffect(() => {
+        fetch('/assets.json')
+            .then(res => res.json())
+            .then(data => {
+                if (data.musicTracks && Array.isArray(data.musicTracks)) {
+                    const tracks = data.musicTracks.map((file: string) => ({
+                        // Eliminar extensión .mp3 y limpiar nombre si es necesario
+                        title: file.replace(/\.[^/.]+$/, "").replace(/Salistre - /g, ""),
+                        file: file
+                    }));
+                    setPlaylist(tracks);
+                }
+                setIsLoading(false);
+            })
+            .catch(err => {
+                console.error("Failed to load music assets", err);
+                setIsLoading(false);
+            });
+    }, []);
 
-    const currentTrack = PLAYLIST[currentTrackIndex];
+    const currentTrack = playlist[currentTrackIndex];
 
     const handleNextTrack = () => {
-        setCurrentTrackIndex((prev) => (prev + 1) % PLAYLIST.length);
+        if (playlist.length === 0) return;
+        setCurrentTrackIndex((prev) => (prev + 1) % playlist.length);
     };
 
     useEffect(() => {
+        if (playlist.length === 0) return;
+
         // Limpiar audio previo si existe
         if (audioRef.current) {
             audioRef.current.pause();
@@ -58,11 +77,13 @@ export default function BackgroundMusic() {
         }
 
         return () => {
-            audio.removeEventListener('ended', handleNextTrack);
-            audio.pause();
+            if (audio) {
+                audio.removeEventListener('ended', handleNextTrack);
+                audio.pause();
+            }
             audioRef.current = null;
         };
-    }, [currentTrackIndex, hasInteracted]); // Re-ejecutar cuando cambia la canción o la interacción
+    }, [currentTrackIndex, hasInteracted, playlist]); // Re-ejecutar cuando cambia la canción o la playlist
 
     const togglePlay = () => {
         if (!audioRef.current) return;
@@ -76,9 +97,7 @@ export default function BackgroundMusic() {
         setHasInteracted(true);
     };
 
-    if (PLAYLIST.length === 0) return null;
-
-
+    if (isLoading || playlist.length === 0) return null;
 
     return (
         <div className="music-player-container">
