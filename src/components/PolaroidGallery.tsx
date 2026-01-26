@@ -25,7 +25,6 @@ const MESSAGES_MARII = [
     "Pasito a pasito",
     "Hoy es tu día",
     "Sigue nadando 🐠",
-    "Eres suficiente",
     "Tu corazón es enorme",
     "No estás sola",
     "Eres luz en la oscuridad",
