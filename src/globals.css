@@ -80,8 +80,10 @@ body {
 
 /* Contenedor de la "Carátula" */
 .album-art-container {
-  width: 85vw !important;
-  max-width: 380px !important;
+  width: 80vw !important;
+  /* Reduced from 85vw */
+  max-width: 350px !important;
+  /* Reduced from 380px */
   aspect-ratio: 1/1;
   background-color: var(--spotify-dark-gray);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
@@ -89,7 +91,7 @@ body {
   overflow: hidden;
   position: relative;
 
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -104,29 +106,30 @@ body {
 
 /* Info del track */
 .track-info {
-  width: 85vw !important;
-  max-width: 380px !important;
+  width: 80vw !important;
+  /* Reduced from 85vw */
+  max-width: 350px !important;
+  /* Reduced from 380px */
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   padding-left: 2px;
   text-align: left;
 }
 
 .track-title {
-  /* Tamaño ajustado para móvil */
-  font-size: 2rem !important;
+  /* Tamaño ajustado para móvil - Reducido aún más */
+  font-size: 1.75rem !important;
   font-weight: 800;
   color: var(--spotify-white);
   line-height: 1.1;
-  /* Permitir multilínea */
   white-space: normal;
   overflow: visible;
   margin-bottom: 6px;
 }
 
-/* Media query para no pasarse en tablets/desktop */
+/* Media query para Tablets/Desktop */
 @media (min-width: 500px) {
   .track-title {
     font-size: 2.5rem !important;
@@ -134,7 +137,7 @@ body {
 }
 
 .track-artist {
-  font-size: 1.2rem !important;
+  font-size: 1.1rem !important;
   color: var(--spotify-light-gray);
   font-weight: 500;
   letter-spacing: 0.01em;

@@ -34,6 +34,12 @@ export default defineConfig({
                         type: 'image/png'
                     }
                 ]
+            },
+            workbox: {
+                cleanupOutdatedCaches: true,
+                clientsClaim: true,
+                skipWaiting: true,
+                globPatterns: ['**/*.{js,css,html,ico,png,svg,mp3,jpg}']
             }
         })
     ],
