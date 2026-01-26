@@ -40,7 +40,7 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
     const currentImages = mode === 'marii' ? mariiImages : babyImages;
     const currentMessages = mode === 'marii' ? MESSAGES_MARII : MESSAGES_BABY;
     const currentArtist = mode === 'marii' ? 'Marii the Nursee' : 'Baby FranVi';
-    const currentTitle = mode === 'marii' ? 'Recuerdos Bonitos' : 'Mini Fran';
+
 
     // Reiniciar índice al cambiar de modo
     const handleModeChange = (newMode: 'marii' | 'baby') => {
