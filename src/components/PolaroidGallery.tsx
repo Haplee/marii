@@ -56,7 +56,7 @@ const MESSAGES_MARII = [
 ];
 
 const MESSAGES_BABY = [
-    "¿A que soy mono?",
+    "¿A que soy mono? 🐵",
     "Para que sonrías",
     "Mini Fran al rescate",
     "Bebé anti-estrés",
@@ -64,8 +64,60 @@ const MESSAGES_BABY = [
     "Dosis de ternura",
     "Un pequeño abrazo",
     "Sonríe por mí",
-    "¡Ánimo guapa!"
+    "¡Ánimo guapa!",
+    "Si yo pude andar, tú puedes con esto",
+    "Mirada de 'Tú puedes'",
+    "Soy todo orejas (y mofletes)",
+    "Te mando fuerza bebé",
+    "¿Ves esta carita? Es de orgullo",
+    "Pequeño pero matón",
+    "Chute de energía ⚡",
+    "Aquí estoy pa ti",
+    "Hago pucheritos si te rindes",
+    "Besito volador 😘",
+    "Soy tu fan número 1",
+    "Rebeldía infantil activada",
+    "Cara de pillo = Ánimo",
+    "Estoy vigilando que estudies",
+    "¡Guau! (Digoo... ¡Vamos!)",
+    "Cachetes de la suerte",
+    "Mirada penetrante de ánimo",
+    "Soy irresistible (y lo sabes)",
+    "Hazlo por este bebé",
+    "Te como a besos",
+    "Soy pequeño, pero mi apoyo es gigante",
+    "¿Un bibi de ánimo?",
+    "Arriba esos ánimos 💪",
+    "No me llores que lloro yo",
+    "Soy el jefe de tu club de fans",
+    "Sonrisa mellada",
+    "Ojitos de esperanza",
+    "Ternura en estado puro",
+    "Vengo a alegrarte el día",
+    "¿Jugamos... a aprobar?",
+    "Soy tu amuleto",
+    "Abrazo de oso pequeño",
+    "¡Tú molas mucho!",
+    "Mi superhéroe eres tú",
+    "Dame un abrazo virtual",
+    "Soy comestible 🍫",
+    "Risitas curativas",
+    "Patadita de la suerte",
+    "Soy pura vitamina B(ebé)",
+    "Te observo... con amor",
+    "Vamos campeona 🏆",
+    "Ríete un poquito venga"
 ];
+
+// Utility to shuffle array (Fisher-Yates)
+function shuffleArray<T>(array: T[]): T[] {
+    const newArray = [...array];
+    for (let i = newArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+    }
+    return newArray;
+}
 
 type Props = {
     mariiImages: string[];
@@ -77,9 +129,25 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
 
-    // Seleccionar datos según el modo
-    const currentImages = mode === 'marii' ? mariiImages : babyImages;
-    const currentMessages = mode === 'marii' ? MESSAGES_MARII : MESSAGES_BABY;
+    // State for shuffled content to ensure randomness
+    const [shuffledContent, setShuffledContent] = useState<{
+        images: string[];
+        messages: string[];
+    }>({ images: [], messages: [] });
+
+    // Initialize/Update shuffled content when mode or props change
+    useEffect(() => {
+        const originalImages = mode === 'marii' ? mariiImages : babyImages;
+        const originalMessages = mode === 'marii' ? MESSAGES_MARII : MESSAGES_BABY;
+
+        if (originalImages.length > 0) {
+            setShuffledContent({
+                images: shuffleArray(originalImages),
+                messages: shuffleArray(originalMessages)
+            });
+        }
+    }, [mode, mariiImages, babyImages]);
+
     const currentArtist = mode === 'marii' ? 'Marii the Nursee' : 'Baby FranVi';
 
 
@@ -87,23 +155,24 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
     const handleModeChange = (newMode: 'marii' | 'baby') => {
         setMode(newMode);
         setCurrentIndex(0);
+        // The useEffect above will handle the reshuffling
     };
 
     useEffect(() => {
         setIsLoaded(true);
     }, []);
 
-    const hasPhotos = currentImages && currentImages.length > 0;
+    const hasPhotos = shuffledContent.images && shuffledContent.images.length > 0;
     const DURATION = 8;
 
     // Autoplay
     useEffect(() => {
         if (!hasPhotos) return;
         const timer = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % currentImages.length);
+            setCurrentIndex((prev) => (prev + 1) % shuffledContent.images.length);
         }, DURATION * 1000);
         return () => clearInterval(timer);
-    }, [hasPhotos, currentImages.length, mode]); // Reset timer on mode change
+    }, [hasPhotos, shuffledContent.images.length, mode]); // Reset timer on mode change
 
     if (!isLoaded) return null;
 
@@ -116,7 +185,6 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
 
             <div className="gallery-wrapper">
 
-                {/* Botones de Navegación Estilo Tabs/Píldoras */}
                 {/* Botones de Navegación Estilo Tabs/Píldoras */}
                 <div style={{
                     display: 'flex',
@@ -173,7 +241,7 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
                             <AnimatePresence mode="popLayout" initial={false}>
                                 <motion.img
                                     key={`${mode}-${currentIndex}`} // Clave compuesta para animar cambio de modo
-                                    src={mode === 'marii' ? `/images/${currentImages[currentIndex]}` : `/bebes/${currentImages[currentIndex]}`}
+                                    src={mode === 'marii' ? `/images/${shuffledContent.images[currentIndex]}` : `/bebes/${shuffledContent.images[currentIndex]}`}
                                     className="album-art-img"
                                     alt="Recuerdo"
                                     initial={{ opacity: 0, scale: 0.95 }}
@@ -193,7 +261,7 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
                                     exit={{ opacity: 0, y: -10 }}
                                     transition={{ duration: 0.4 }}
                                 >
-                                    <h2 className="track-title">{currentMessages[currentIndex % currentMessages.length]}</h2>
+                                    <h2 className="track-title">{shuffledContent.messages[currentIndex % shuffledContent.messages.length]}</h2>
                                     <p className="track-artist">{currentArtist}</p>
                                 </motion.div>
                             </AnimatePresence>
