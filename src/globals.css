@@ -34,25 +34,26 @@ body {
 .title-container {
   width: 100%;
   text-align: center;
-  padding-top: 2rem;
-  /* Más espacio arriba */
-  padding-bottom: 1rem;
+  padding-top: 1.5rem;
+  /* Reduced */
+  padding-bottom: 0.5rem;
+  /* Reduced */
   flex-shrink: 0;
 }
 
 .subtitle {
-  font-size: 1.1rem;
-  /* Aumentado considerablemente */
+  font-size: 0.85rem;
+  /* Reduced */
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   font-weight: 600;
 }
 
 .main-title {
-  font-size: 1.8rem;
-  /* Aumentado considerablemente */
+  font-size: 1.4rem;
+  /* Reduced */
   font-weight: 700;
   color: var(--spotify-white);
 }
@@ -61,37 +62,36 @@ body {
 .gallery-wrapper {
   flex: 1;
   width: 100%;
-  max-width: 480px;
+  max-width: 450px;
   margin: 0 auto;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 16px;
-  /* Espacio inferior para evitar solapamiento con controles */
-  padding-bottom: 8rem;
+  padding: 12px;
+  padding-bottom: 6rem;
+  /* Ensure space for nav/music */
 
   @media (max-width: 450px) {
-    padding: 10px;
-    padding-bottom: 7rem;
+    padding: 8px;
+    padding-bottom: 5rem;
   }
 }
 
 /* Contenedor de la "Carátula" */
 .album-art-container {
-  width: 80vw !important;
-  /* Reduced from 85vw */
-  max-width: 350px !important;
-  /* Reduced from 380px */
+  width: 70vw !important;
+  /* SIGNIFICANTLY REDUCED */
+  max-width: 300px !important;
   aspect-ratio: 1/1;
   background-color: var(--spotify-dark-gray);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
   border-radius: 12px;
   overflow: hidden;
   position: relative;
 
-  margin-bottom: 1.2rem;
+  margin-bottom: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,27 +106,26 @@ body {
 
 /* Info del track */
 .track-info {
-  width: 80vw !important;
-  /* Reduced from 85vw */
-  max-width: 350px !important;
-  /* Reduced from 380px */
+  width: 70vw !important;
+  /* Matches art width */
+  max-width: 300px !important;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-bottom: 1.2rem;
-  padding-left: 2px;
+  gap: 2px;
+  margin-bottom: 1rem;
+  padding-left: 0;
   text-align: left;
 }
 
 .track-title {
-  /* Tamaño ajustado para móvil - Reducido aún más */
-  font-size: 1.75rem !important;
+  font-size: 1.5rem !important;
+  /* Reduced */
   font-weight: 800;
   color: var(--spotify-white);
   line-height: 1.1;
   white-space: normal;
   overflow: visible;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 /* Media query para Tablets/Desktop */
@@ -134,10 +133,16 @@ body {
   .track-title {
     font-size: 2.5rem !important;
   }
+
+  .album-art-container,
+  .track-info {
+    width: 400px !important;
+    max-width: 400px !important;
+  }
 }
 
 .track-artist {
-  font-size: 1.1rem !important;
+  font-size: 1rem !important;
   color: var(--spotify-light-gray);
   font-weight: 500;
   letter-spacing: 0.01em;
@@ -145,18 +150,19 @@ body {
 
 @media (min-width: 500px) {
   .track-artist {
-    font-size: 1.3rem !important;
+    font-size: 1.2rem !important;
   }
 }
 
 /* Barra de progreso */
 .progress-container {
   width: 100%;
-  height: 6px;
+  height: 4px;
+  /* Thinner */
   background-color: rgba(255, 255, 255, 0.15);
-  border-radius: 6px;
+  border-radius: 4px;
   overflow: hidden;
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
 .progress-bar {
@@ -192,26 +198,26 @@ body {
 .music-player-info {
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
-  padding: 12px 18px;
-  border-radius: 16px;
+  padding: 8px 14px;
+  /* Reduced */
+  border-radius: 12px;
   color: white;
-  font-size: 1rem;
+  font-size: 0.9rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   transition: all 0.3s ease;
-  max-width: 300px;
+  max-width: 250px;
   cursor: pointer;
 }
 
 .music-player-disc {
-  font-size: 2rem;
-  /* El spin se maneja inline o con clase condicional */
+  font-size: 1.5rem;
 }
 
 .music-player-label {
-  font-size: 1.35rem;
+  font-size: 1.1rem;
   opacity: 0.9;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -223,8 +229,8 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 200px;
-  font-size: 1rem;
+  max-width: 150px;
+  font-size: 0.9rem;
 }
 
 .music-control-button {
@@ -232,35 +238,35 @@ body {
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  /* Reduced */
+  height: 60px;
+  /* Reduced */
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: white;
-  font-size: 2.7rem;
+  font-size: 2.2rem;
   transition: all 0.3s ease;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
 }
 
-/* Ajustes específicos para móvil si fuera necesario, 
-   pero estas medidas ya son grandes */
+/* Ajustes específicos para móvil */
 @media (max-width: 480px) {
   .music-player-container {
-    bottom: 30px;
+    bottom: 20px;
     right: 16px;
   }
 
-  /* Forzamos que sea grande también en móvil */
   .music-control-button {
-    width: 65px;
-    height: 65px;
-    font-size: 2.5rem;
+    width: 50px;
+    height: 50px;
+    font-size: 2rem;
   }
 
   .music-player-info {
-    max-width: 85vw;
+    max-width: 80vw;
   }
 }
 
