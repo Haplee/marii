@@ -13,6 +13,7 @@ export default defineConfig({
                 enabled: true
             },
             manifest: {
+                id: '/',
                 name: 'Marii Gallery',
                 short_name: 'Marii',
                 description: 'Un pequeño rincón para darte ánimos.',
@@ -24,17 +25,23 @@ export default defineConfig({
                 icons: [
                     {
                         src: '/logo.png',
+                        sizes: '192x192',
+                        type: 'image/png'
+                    },
+                    {
+                        src: '/logo.png',
+                        sizes: '512x512',
+                        type: 'image/png'
+                    },
+                    {
+                        src: '/logo.png',
                         sizes: '512x512',
                         type: 'image/png',
                         purpose: 'any maskable'
-                    },
-                    {
-                        src: '/icon.png',
-                        sizes: '512x512',
-                        type: 'image/png'
                     }
                 ]
             },
+            manifestFilename: 'manifest.json',
             workbox: {
                 cleanupOutdatedCaches: true,
                 clientsClaim: true,

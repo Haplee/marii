@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import PolaroidGallery from './components/PolaroidGallery';
 import BackgroundMusic from './components/BackgroundMusic';
+import InstallPrompt from './components/InstallPrompt';
 
 export default function App() {
     const [images, setImages] = useState({ mariiImages: [], babyImages: [] });
@@ -32,6 +33,7 @@ export default function App() {
         <main style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
             <PolaroidGallery mariiImages={images.mariiImages} babyImages={images.babyImages} />
             <BackgroundMusic />
+            <InstallPrompt />
         </main>
     );
 }
