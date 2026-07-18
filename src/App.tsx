@@ -1,39 +1,70 @@
 import { useState, useEffect } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import SplashScreen from './components/SplashScreen';
+import DaysCounter from './components/DaysCounter';
 import PolaroidGallery from './components/PolaroidGallery';
-import BackgroundMusic from './components/BackgroundMusic';
+import DailyMessage from './components/DailyMessage';
+import SocialLinks from './components/SocialLinks';
+import MusicPlayer from './components/MusicPlayer';
 import InstallPrompt from './components/InstallPrompt';
 
+type Assets = {
+    mariiImages: string[];
+    babyImages: string[];
+    musicTracks: string[];
+};
+
+const SPLASH_MIN_MS = 2400;
+
 export default function App() {
-    const [images, setImages] = useState({ mariiImages: [], babyImages: [] });
+    const [assets, setAssets] = useState<Assets>({ mariiImages: [], babyImages: [], musicTracks: [] });
     const [loading, setLoading] = useState(true);
+    const [splashDone, setSplashDone] = useState(false);
 
     useEffect(() => {
         fetch('/assets.json')
             .then(res => res.json())
             .then(data => {
-                setImages(data);
+                setAssets({
+                    mariiImages: data.mariiImages ?? [],
+                    babyImages: data.babyImages ?? [],
+                    musicTracks: data.musicTracks ?? []
+                });
                 setLoading(false);
             })
             .catch(err => {
-                console.error("Failed to load assets", err);
+                console.error('Failed to load assets', err);
                 setLoading(false);
             });
+
+        const timer = setTimeout(() => setSplashDone(true), SPLASH_MIN_MS);
+        return () => clearTimeout(timer);
     }, []);
 
-    if (loading) return <div style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        color: 'white',
-        background: '#121212'
-    }}>Cargando...</div>;
+    const showSplash = loading || !splashDone;
 
     return (
-        <main style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
-            <PolaroidGallery mariiImages={images.mariiImages} babyImages={images.babyImages} />
-            <BackgroundMusic />
-            <InstallPrompt />
-        </main>
+        <>
+            <AnimatePresence>
+                {showSplash && <SplashScreen key="splash" />}
+            </AnimatePresence>
+
+            {!showSplash && (
+                <main className="app-shell">
+                    <header className="title-container">
+                        <p className="subtitle">Reproduciendo para</p>
+                        <h1 className="main-title">Marii the Nursee</h1>
+                    </header>
+
+                    <DaysCounter />
+                    <PolaroidGallery mariiImages={assets.mariiImages} babyImages={assets.babyImages} />
+                    <DailyMessage />
+                    <SocialLinks />
+
+                    <MusicPlayer tracks={assets.musicTracks} />
+                    <InstallPrompt />
+                </main>
+            )}
+        </>
     );
 }
