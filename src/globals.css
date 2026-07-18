@@ -87,7 +87,7 @@ body {
 
 .main-title {
   font-family: var(--font-display);
-  font-size: 1.9rem;
+  font-size: clamp(1.45rem, 3dvh, 1.9rem);
   font-weight: 600;
   letter-spacing: 0.01em;
   color: var(--text);
@@ -112,7 +112,7 @@ body {
 
 .days-counter-number {
   font-family: var(--font-display);
-  font-size: 2.6rem;
+  font-size: clamp(2rem, 4.2dvh, 2.6rem);
   font-weight: 700;
   line-height: 1;
   color: var(--accent);
@@ -176,7 +176,7 @@ body {
 }
 
 .album-art-container {
-  width: min(74vw, 320px);
+  width: min(74vw, 320px, 38dvh);
   aspect-ratio: 1 / 1;
   background-color: var(--bg-1);
   box-shadow: var(--shadow);
@@ -208,7 +208,7 @@ body {
 }
 
 .track-info {
-  width: min(74vw, 320px);
+  width: min(74vw, 320px, 38dvh);
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -218,7 +218,7 @@ body {
 
 .track-title {
   font-family: var(--font-hand);
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 3.2dvh, 2rem);
   font-weight: 700;
   color: var(--text);
   line-height: 1.05;
@@ -375,13 +375,26 @@ body {
   align-items: center;
   gap: 4px 10px;
 
-  background: rgba(14, 14, 26, 0.82);
+  background: rgba(12, 12, 22, 0.95);
   border: 1px solid var(--glass-border);
   border-radius: 20px;
   padding: 10px 14px 8px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: var(--shadow);
+}
+
+/* Fundido a negro tras la barra: el contenido se desvanece en vez de cortarse */
+.player-bar::before {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: calc(160px + var(--safe-bottom));
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, rgba(7, 7, 15, 0.85) 45%, #07070f 80%);
 }
 
 .player-bar-info {
@@ -721,19 +734,93 @@ body {
   }
 }
 
+/* ============ Pantallas cortas (iPhone SE y similares) ============ */
+
+@media (max-height: 720px) {
+  .app-shell {
+    padding-top: calc(0.5rem + var(--safe-top));
+    padding-bottom: calc(135px + var(--safe-bottom));
+  }
+
+  .title-container {
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+  }
+
+  .main-title {
+    font-size: 1.3rem;
+  }
+
+  .days-counter {
+    padding: 6px 16px;
+    margin-bottom: 0.6rem;
+  }
+
+  .days-counter-number {
+    font-size: 1.7rem;
+  }
+
+  .days-counter-label {
+    font-size: 0.9rem;
+  }
+
+  .days-counter-sub {
+    display: none;
+  }
+
+  .mode-tabs {
+    margin-bottom: 10px;
+  }
+
+  .mode-tab {
+    padding: 5px 15px;
+    font-size: 0.85rem;
+  }
+
+  .album-art-container {
+    width: min(64vw, 28dvh);
+    margin-bottom: 0.6rem;
+  }
+
+  .track-info {
+    width: min(64vw, 28dvh);
+    margin-bottom: 0.7rem;
+  }
+
+  .track-title {
+    font-size: 1.35rem;
+  }
+
+  .progress-container {
+    margin-top: 6px;
+  }
+
+  .daily-message {
+    padding: 9px 15px 8px;
+  }
+
+  .daily-message-label {
+    margin-bottom: 3px;
+  }
+
+  .daily-message-text {
+    font-size: 1.25rem;
+  }
+}
+
 /* ============ Pantallas más grandes ============ */
 
 @media (min-width: 500px) {
   .main-title {
-    font-size: 2.3rem;
+    font-size: clamp(1.6rem, 3.4dvh, 2.3rem);
   }
 
   .album-art-container,
   .track-info {
-    width: 360px;
+    width: min(360px, 34dvh);
   }
 
   .track-title {
-    font-size: 2.3rem;
+    font-size: clamp(1.6rem, 3.6dvh, 2.3rem);
   }
 }
