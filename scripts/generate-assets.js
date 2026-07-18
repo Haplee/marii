@@ -26,7 +26,7 @@ function getMusic(dirName) {
     }
     return fs.readdirSync(dirPath).filter(file => {
         const ext = path.extname(file).toLowerCase();
-        return ['.mp3', '.wav', '.ogg'].includes(ext);
+        return ['.mp3', '.m4a', '.wav', '.ogg'].includes(ext);
     });
 }
 
