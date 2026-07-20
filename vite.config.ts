@@ -8,7 +8,9 @@ export default defineConfig({
         react(),
         VitePWA({
             registerType: 'autoUpdate',
-            includeAssets: ['logo.png', 'icon.png', 'music/*.mp3', 'images/*.jpg', 'bebes/*.jpg'],
+            // Solo los iconos: las fotos y los MP3 se quedan fuera del precache a
+            // proposito, para que instalar la app no descargue decenas de MB.
+            includeAssets: ['favicon-32.png', 'apple-touch-icon.png'],
             devOptions: {
                 enabled: true
             },
@@ -24,20 +26,20 @@ export default defineConfig({
                 start_url: '/',
                 icons: [
                     {
-                        src: '/logo.png',
+                        src: '/icon-192.png',
                         sizes: '192x192',
                         type: 'image/png'
                     },
                     {
-                        src: '/logo.png',
+                        src: '/icon-512.png',
                         sizes: '512x512',
                         type: 'image/png'
                     },
                     {
-                        src: '/logo.png',
+                        src: '/icon-maskable-512.png',
                         sizes: '512x512',
                         type: 'image/png',
-                        purpose: 'any maskable'
+                        purpose: 'maskable'
                     }
                 ]
             },

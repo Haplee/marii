@@ -190,10 +190,28 @@ body {
   border: 1px solid var(--glass-border);
 }
 
-.album-art-img {
+.album-art-frame {
+  position: absolute;
+  inset: 0;
+}
+
+/* Copia difuminada de la propia foto rellenando el marco cuadrado, para que la
+   foto real quepa entera sin recortar a nadie y sin bandas negras. */
+.album-art-blur {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  filter: blur(24px) saturate(1.3) brightness(0.55);
+  transform: scale(1.2);
+}
+
+.album-art-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .album-art-empty {
