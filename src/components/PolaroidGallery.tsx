@@ -172,7 +172,7 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
         img.src = `${basePath}/${next}`;
     }, [currentIndex, hasPhotos, shuffledContent.images, basePath]);
 
-    const currentArtist = mode === 'marii' ? 'Marii the Nursee' : 'Baby FranVi';
+    const currentArtist = mode === 'marii' ? 'Mariaa 💕' : 'Baby FranVi';
 
     return (
         <div className="gallery-wrapper">
