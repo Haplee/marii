@@ -202,18 +202,28 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
                 <>
                     <div className="album-art-container">
                         <AnimatePresence mode="popLayout" initial={false}>
-                            <motion.img
+                            <motion.div
                                 key={`${mode}-${currentIndex}`}
-                                src={`${basePath}/${shuffledContent.images[currentIndex]}`}
-                                className="album-art-img"
-                                alt="Recuerdo"
-                                loading="lazy"
-                                decoding="async"
+                                className="album-art-frame"
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 1.05 }}
                                 transition={{ duration: 0.6, ease: 'easeOut' }}
-                            />
+                            >
+                                <img
+                                    src={`${basePath}/${shuffledContent.images[currentIndex]}`}
+                                    className="album-art-blur"
+                                    alt=""
+                                    aria-hidden="true"
+                                />
+                                <img
+                                    src={`${basePath}/${shuffledContent.images[currentIndex]}`}
+                                    className="album-art-img"
+                                    alt="Recuerdo"
+                                    loading="lazy"
+                                    decoding="async"
+                                />
+                            </motion.div>
                         </AnimatePresence>
                     </div>
 
