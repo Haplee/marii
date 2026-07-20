@@ -16,11 +16,13 @@ export default defineConfig({
             },
             manifest: {
                 id: '/',
-                name: 'Marii Gallery',
-                short_name: 'Marii',
+                lang: 'es',
+                name: 'Mariaa 💕',
+                short_name: 'Mariaa',
                 description: 'Un pequeño rincón para darte ánimos.',
-                theme_color: '#051025',
-                background_color: '#000000',
+                // Ambos deben coincidir con --bg-0 de globals.css (#07070f).
+                theme_color: '#07070f',
+                background_color: '#07070f',
                 display: 'standalone',
                 orientation: 'portrait',
                 start_url: '/',

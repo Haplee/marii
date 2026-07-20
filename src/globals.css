@@ -38,6 +38,9 @@
 
 html {
   height: 100%;
+  /* El body no siempre llega a las safe areas del iPhone: pintando aquí el mismo
+     fondo, esas zonas no pueden quedar de otro color. */
+  background-color: var(--bg-0);
 }
 
 body {
