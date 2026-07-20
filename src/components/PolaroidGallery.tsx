@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import type { CSSProperties, SyntheticEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const MESSAGES_MARII = [
@@ -128,6 +129,16 @@ const DURATION = 8;
 export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
     const [mode, setMode] = useState<'marii' | 'baby'>('marii');
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [aspectRatio, setAspectRatio] = useState(1);
+
+    // El marco copia la proporción de la foto que se está viendo, así la imagen
+    // lo llena por completo sin recortar a nadie y sin franjas a los lados.
+    const handleImageLoad = (event: SyntheticEvent<HTMLImageElement>) => {
+        const { naturalWidth, naturalHeight } = event.currentTarget;
+        if (naturalWidth && naturalHeight) {
+            setAspectRatio(naturalWidth / naturalHeight);
+        }
+    };
 
     const [shuffledContent, setShuffledContent] = useState<{
         images: string[];
@@ -200,30 +211,21 @@ export default function PolaroidGallery({ mariiImages, babyImages }: Props) {
                 </div>
             ) : (
                 <>
-                    <div className="album-art-container">
+                    <div className="album-art-container" style={{ '--ar': aspectRatio } as CSSProperties}>
                         <AnimatePresence mode="popLayout" initial={false}>
-                            <motion.div
+                            <motion.img
                                 key={`${mode}-${currentIndex}`}
-                                className="album-art-frame"
+                                src={`${basePath}/${shuffledContent.images[currentIndex]}`}
+                                className="album-art-img"
+                                alt="Recuerdo"
+                                loading="lazy"
+                                decoding="async"
+                                onLoad={handleImageLoad}
                                 initial={{ opacity: 0, scale: 0.95 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 1.05 }}
                                 transition={{ duration: 0.6, ease: 'easeOut' }}
-                            >
-                                <img
-                                    src={`${basePath}/${shuffledContent.images[currentIndex]}`}
-                                    className="album-art-blur"
-                                    alt=""
-                                    aria-hidden="true"
-                                />
-                                <img
-                                    src={`${basePath}/${shuffledContent.images[currentIndex]}`}
-                                    className="album-art-img"
-                                    alt="Recuerdo"
-                                    loading="lazy"
-                                    decoding="async"
-                                />
-                            </motion.div>
+                            />
                         </AnimatePresence>
                     </div>
 
