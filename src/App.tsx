@@ -53,7 +53,7 @@ export default function App() {
                 <main className="app-shell">
                     <header className="title-container">
                         <p className="subtitle">Reproduciendo para</p>
-                        <h1 className="main-title">Marii the Nursee</h1>
+                        <h1 className="main-title">Mariaa 💕</h1>
                     </header>
 
                     <DaysCounter />
