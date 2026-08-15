@@ -1,30 +1,48 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type Props = {
     tracks: string[];
 };
 
+// Pista tocable: local (mp3 en public/music) o remota (preview de 30s vía Deezer)
 type Track = {
-    file: string;
+    id: string;
     title: string;
     artist: string;
+    src: string | null;
+    externalUrl?: string;
+    remote: boolean;
+};
+
+// Forma de cada elemento que devuelve /api/salistre-tracks (ver api/salistre-tracks.py)
+type RemoteApiTrack = {
+    id: number | string;
+    title: string;
+    artist?: string;
+    previewUrl?: string | null;
+    externalUrl?: string;
 };
 
 const SPOTIFY_URL = 'https://open.spotify.com/search/Salistre';
 
+function normalize(text: string): string {
+    return text
+        .normalize('NFKD')
+        .replace(/\p{Diacritic}/gu, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, ' ')
+        .trim();
+}
+
 // "Salistre, Juanlu Montoya - Si Tú No Vienes.mp3" -> artista + título
-function parseTrack(file: string): Track {
+function parseLocalTrack(file: string): Track {
     const name = file.replace(/\.[^/.]+$/, '');
     const separator = name.indexOf(' - ');
-    if (separator === -1) {
-        return { file, title: name, artist: 'Salistre' };
-    }
-    return {
-        file,
-        artist: name.slice(0, separator).trim(),
-        title: name.slice(separator + 3).trim()
-    };
+    const { artist, title } = separator === -1
+        ? { artist: 'Salistre', title: name }
+        : { artist: name.slice(0, separator).trim(), title: name.slice(separator + 3).trim() };
+    return { id: file, title, artist, src: `/music/${file}`, remote: false };
 }
 
 function formatTime(seconds: number): string {
@@ -35,10 +53,43 @@ function formatTime(seconds: number): string {
 }
 
 export default function MusicPlayer({ tracks }: Props) {
-    const playlist = tracks.map(parseTrack);
+    const [remoteTracks, setRemoteTracks] = useState<RemoteApiTrack[]>([]);
+
+    // Catálogo completo de Salistre desde Deezer (api/salistre-tracks.py, solo en Vercel).
+    // Si falla o estamos en local, el reproductor sigue funcionando solo con los mp3 locales.
+    useEffect(() => {
+        let cancelled = false;
+        fetch('/api/salistre-tracks')
+            .then(res => (res.ok ? res.json() : Promise.reject(new Error(`HTTP ${res.status}`))))
+            .then((data: { tracks?: RemoteApiTrack[] }) => {
+                if (!cancelled) setRemoteTracks(Array.isArray(data.tracks) ? data.tracks : []);
+            })
+            .catch(err => console.error('No se pudo cargar el catálogo de Salistre', err));
+        return () => {
+            cancelled = true;
+        };
+    }, []);
+
+    const playlist = useMemo<Track[]>(() => {
+        const local = tracks.map(parseLocalTrack);
+        const localTitles = new Set(local.map(t => normalize(t.title)));
+        const remoteOnly: Track[] = remoteTracks
+            .filter(rt => !localTitles.has(normalize(rt.title)))
+            .map(rt => ({
+                id: `deezer-${rt.id}`,
+                title: rt.title,
+                artist: rt.artist || 'Salistre',
+                src: rt.previewUrl ?? null,
+                externalUrl: rt.externalUrl,
+                remote: true
+            }));
+        return [...local, ...remoteOnly];
+    }, [tracks, remoteTracks]);
+
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const playlistLengthRef = useRef(playlist.length);
     playlistLengthRef.current = playlist.length;
+    const skipGuardRef = useRef(0);
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -79,16 +130,31 @@ export default function MusicPlayer({ tracks }: Props) {
     }, []);
 
     // Cambiar de pista
-    const currentFile = playlist[currentIndex]?.file;
+    useEffect(() => {
+        skipGuardRef.current = 0;
+    }, [playlist]);
+
     useEffect(() => {
         const audio = audioRef.current;
-        if (!audio || !currentFile) return;
-        audio.src = `/music/${currentFile}`;
+        const track = playlist[currentIndex];
+        if (!audio || !track) return;
+
+        if (!track.src) {
+            // Canción de Salistre sin preview disponible en Deezer: se salta sola
+            // (con tope para no entrar en bucle si ninguna pista fuera reproducible)
+            skipGuardRef.current += 1;
+            if (skipGuardRef.current > playlist.length) return;
+            setCurrentIndex(prev => (prev + 1) % Math.max(1, playlist.length));
+            return;
+        }
+        skipGuardRef.current = 0;
+
+        audio.src = track.src;
         setProgress(0);
         setDuration(0);
         // Intentar reproducir; si el navegador bloquea el autoplay se queda en pausa
         audio.play().catch(() => setIsPlaying(false));
-    }, [currentFile]);
+    }, [currentIndex, playlist]);
 
     if (playlist.length === 0) return null;
 
@@ -198,11 +264,16 @@ export default function MusicPlayer({ tracks }: Props) {
                             <ul className="sheet-list">
                                 {playlist.map((track, index) => {
                                     const active = index === currentIndex;
+                                    const playable = Boolean(track.src);
                                     return (
-                                        <li key={track.file}>
+                                        <li key={track.id}>
                                             <button
                                                 className={`sheet-track ${active ? 'active' : ''}`}
                                                 onClick={() => {
+                                                    if (!playable) {
+                                                        window.open(track.externalUrl ?? SPOTIFY_URL, '_blank', 'noopener,noreferrer');
+                                                        return;
+                                                    }
                                                     if (active) {
                                                         togglePlay();
                                                     } else {
@@ -224,6 +295,11 @@ export default function MusicPlayer({ tracks }: Props) {
                                                     <span className="sheet-track-artist">{track.artist}</span>
                                                 </span>
                                                 {active && <span className="sheet-track-now">Sonando</span>}
+                                                {!active && track.remote && (
+                                                    <span className="sheet-track-badge">
+                                                        {playable ? 'preview' : 'abrir ↗'}
+                                                    </span>
+                                                )}
                                             </button>
                                         </li>
                                     );
