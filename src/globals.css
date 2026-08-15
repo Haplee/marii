@@ -672,6 +672,17 @@ body {
   flex-shrink: 0;
 }
 
+.sheet-track-badge {
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  background: var(--glass);
+  padding: 3px 7px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
 /* Ecualizador animado de la pista activa */
 .equalizer {
   display: inline-flex;

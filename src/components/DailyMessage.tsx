@@ -32,7 +32,19 @@ const DAILY_MESSAGES = [
     'Cierra los ojos, respira hondo y pa lante',
     'Eres capaz de muchísimo más de lo que crees, en serio',
     'Sonríe, que cuando sonríes se me arregla el día',
-    'Te quiero muchísimo mi niña, hoy y todos los días ❤️'
+    'Te quiero muchísimo mi niña, hoy y todos los días ❤️',
+    'Gracias por aparecer en mi vida y darme tanta alegría, de verdad ❤️',
+    'Aquí estoy para lo que necesites, cariño, siempre ❤️',
+    'No sabes cuánto te quiero, ni aunque te lo diga cien veces al día',
+    'Pobre mi niña, cómo me gustaría poder cuidarte yo en persona ahora mismo',
+    'Descansa esa cabecita, que hoy también ha sido un día largo',
+    'Deja el móvil un ratito y descansa, anda, que buena falta te hace',
+    'Eres la mejor y no hay quien me lo discuta',
+    'Intenta descansar, que mañana ya pinta mejor día',
+    'Voy a estar pensando en ti aunque no te escriba a cada rato',
+    'Te lo mereces todo, más de lo que tú misma te crees',
+    'Como estás mi niña, preciosa, hermosa, bonita y perfecta',
+    'Y aunque no te lo diga siempre, hoy también te quiero muchísimo ❤️'
 ];
 
 function todayIndex(): number {

@@ -21,3 +21,8 @@ Thumbs.db
 
 # Build output
 dist
+dev-dist
+
+# Python (funciones serverless en api/)
+__pycache__
+*.pyc

@@ -25,6 +25,23 @@ Esta es una aplicación web especial diseñada para ser instalada como una App e
 2. Nombra el archivo como `Artista - Título.mp3` (ej: `Salistre - Contigo.mp3`) para que el reproductor muestre bien el artista y el título.
 3. Sube los cambios a GitHub (commit y push). La canción aparecerá sola en la lista del reproductor — no hay que tocar código.
 
+### 🔄 Canciones nuevas de Salistre, automático
+
+Además de los mp3 que subas a mano, el reproductor se completa solo con **todo** el
+catálogo de Salistre (`api/salistre-tracks.py`), usando la API pública y gratuita de
+[Deezer](https://developers.deezer.com/api) — sin cuenta, sin clave y sin coste.
+
+- Solo funciona **desplegado en Vercel** (no en `npm run dev` local): Vercel detecta
+  automáticamente cualquier archivo `.py` dentro de `api/` y lo publica como función.
+- Cuando Salistre saca una canción nueva, aparece sola en la lista la siguiente vez que
+  alguien abre la web (la respuesta se cachea 6 horas en el CDN de Vercel).
+- Las canciones que ya tienes como mp3 local sonarán completas como siempre. Las que
+  todavía no has descargado se oyen como preview de 30s (así lo entrega Deezer) con la
+  etiqueta "preview"; si Deezer no tiene preview de alguna, se marca "abrir ↗" y lleva
+  a esa canción en Deezer.
+- No hace falta configurar nada. Si algún día Deezer cambiara el ID del artista, se
+  puede fijar a mano con la variable de entorno `DEEZER_ARTIST_ID` en Vercel.
+
 ## 🚀 Cómo publicar en Internet (Vercel)
 
 Si aún no lo has hecho:
